@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/Simaira.Function.API.Swagger/v17
+/.vs/Simaira.Function.API.Swagger/FileContentIndex
+/.vs/Simaira.Function.API.Swagger/DesignTimeBuild
+/.vs/Simaira.Function.API.Swagger/config/applicationhost.config
