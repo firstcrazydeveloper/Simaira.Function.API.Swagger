@@ -1,88 +1,102 @@
-# Simaira.Function.API.Swagger
+# Simaira.Serilog.Testing.Application
+Welcome to the Simaira.Serilog.Testing.Application repository. This repository serves as a boilerplate for implementing Serilog with .NET 8, providing a foundational setup for both Console and Web applications.
 ## Overview
-Simaira.Function.API.Swagger is a boilerplate project aimed at providing a foundational setup for building APIs using .NET 8, Azure Functions, and Swagger, along with built-in authentication features. This project serves as a starting point for developers looking to quickly scaffold an API that adheres to modern standards and best practices.
+Simaira.Serilog.Testing.Application aims to streamline the process of integrating Serilog into your .NET 8 projects. Serilog is a powerful and flexible logging library that makes structured logging easy and efficient. This repository offers a ready-to-use template to help you get started quickly, with examples and configurations for both Console and Web applications.
 
 ## Features
-- .NET 8: Leverage the latest features and improvements in .NET 8.
-- Azure Functions: Develop serverless applications with scalable and efficient function execution.
-- Swagger Integration: Automatically generate interactive API documentation using Swagger.
-- Authentication: Secure your API with robust authentication mechanisms.
+- <b>Pre-configured Serilog setup:</b> Simplifies the integration of Serilog into .NET 8 applications.
+- <b>Support for Console Applications: </b>Provides example code and configuration for using Serilog in a console app.
+- <b>Support for Web Applications:</b> Includes setup and examples for integrating Serilog into ASP.NET Core web applications.
+- <b>Structured Logging:</b> Facilitates structured logging, making it easier to search and analyze logs.
+- <b>Extensible and Customizable:</b> Easily extend and customize the configuration to suit your specific needs.
 
 ## Getting Started
 ### Prerequisites
+Ensure you have the following installed:
 - .NET 8 SDK
-- Azure Functions Core Tools
-- Visual Studio or VS Code
-- Azure Account (for deploying to Azure)
+- Visual Studio or any other compatible IDE
 
 ### Installation
 #### Clone the repository:
 
 ```
-git clone https://github.com/yourusername/Simaira.Function.API.Swagger.git
+git clone https://github.com/yourusername/Simaira.Serilog.Testing.Application.git
 ```
 
 #### Navigate to the project directory:
 
 ```
-cd Simaira.Function.API.Swagger
+cd Simaira.Serilog.Testing.Application
 ```
 #### Restore dependencies:
 ```
 dotnet restore
 ```
+### Running the Console Application
+#### Navigate to the console application directory:
+
+```
+cd Serilog.Console.Testing.Application
+```
+
+#### Run the application:
+
+```
+dotnet run
+```
+
+### Running the Web Application
+#### Navigate to the web application directory:
+
+```
+cd Serilog.WebAPI.Testing.Application
+```
+
+#### Run the application:
+
+```
+dotnet run
+```
 
 ### Configuration
-#### Configure Authentication:
-
-Update the appsettings.json file with your authentication settings. Ensure you provide the necessary client ID, tenant ID, and other relevant settings for your authentication provider.
-#### Configure Azure Functions:
-
-Ensure the local.settings.json file is properly configured with your Azure Storage account connection string and other necessary settings.
-### Running the Project
-#### Run the Azure Functions locally:
-```
-func start
-```
-
-#### Open your browser and navigate to the Swagger UI:
-```
-http://localhost:7122/api/Swagger/ui
-```
-
-### Deploying to Azure
-#### Login to Azure:
-```
-az login
-```
-
-#### Deploy the function app to Azure:
+The Serilog configuration is defined in the appsettings.json file for both Console and Web applications. Here is an example configuration:
 
 ```
-func azure functionapp publish <FunctionAppName>
-```
+{
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft": "Warning",
+        "System": "Warning"
+      }
+    },
+    "WriteTo": [
+      {
+        "Name": "Console"
+      },
+      {
+        "Name": "File",
+        "Args": {
+          "path": "Logs/log-.txt",
+          "rollingInterval": "Day"
+        }
+      }
+    ],
+    "Enrich": [ "FromLogContext", "WithMachineName", "WithThreadId" ],
+    "Properties": {
+      "Application": "Simaira.Serilog.Testing.Application"
+    }
+  }
+}
 
-## Project Structure
 ```
-Simaira.Function.API.Swagger/
-│
-├── FunctionApp/              # Contains Azure Function definitions
-│   ├── HttpTriggers/         # HTTP trigger functions
-│   └── ...
-│
-├── Models/                   # Data models
-│
-├── Services/                 # Business logic and services
-│
-├── appsettings.json          # Application configuration
-│
-├── local.settings.json       # Local development settings
-│
-└── Startup.cs                # Application startup and configuration
-```
+Feel free to modify the settings as per your requirements.
+
+
 
 ## Contributing
-We welcome contributions! Please fork the repository and submit pull requests. For major changes, please open an issue first to discuss what you would like to change.
+We welcome contributions to improve this boilerplate repository. Please fork the repository and submit pull requests.
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
